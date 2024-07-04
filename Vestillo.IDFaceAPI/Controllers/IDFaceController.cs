@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Vestillo.IDFaceAPI.Entities;
+
 
 namespace Vestillo.IDFaceAPI.Controllers
 {
@@ -10,37 +10,14 @@ namespace Vestillo.IDFaceAPI.Controllers
     public class IDFaceController : ControllerBase
     {
         private readonly ILogger<IDFaceController> _logger;
+      
 
-
-        public IDFaceController(ILogger<IDFaceController> logger)
+        public IDFaceController(ILogger<IDFaceController> logger, IConfiguration configuration)
         {
             this._logger = logger;
-        }
-
-
-        public class Action
-        {
-            [JsonPropertyName("action")]
-            public string ActionName { get; set; }
-            [JsonPropertyName("parameters")]
-            public string Parameters { get; set; }
-        }
-
-        public class Result
-        {
-            [JsonPropertyName("event")]
-            public int Event { get; set; }
-            public int user_id { get; set; }
-            public string user_name { get; set; }
-            public bool user_image { get; set; }
-            public string message { get; set; } 
-            public int portal_id { get; set; }
-            public List<Action> actions { get; set; }
-        }
-
-        public class Root
-        {
-            public Result Result { get; set; }
+            Connection.ProviderFactory.StringConnection = configuration.GetConnectionString("db");
+            Lib.Funcoes.SetIdEmpresaLogada = Convert.ToInt32(configuration.GetSection("parametros").GetSection("empresa").Value);
+            Lib.Funcoes.UtilizaAPI = true;
         }
 
 
@@ -55,25 +32,32 @@ namespace Vestillo.IDFaceAPI.Controllers
             if (user_id > 0 )
             {
                 _logger.LogInformation($"new_user_identified.fcgi ------=> user_id:{user_id}, user_name:{user_name}");
-                          
 
+                var nomeDoUsuario = string.Empty;
+                var vetUsuario = user_name.Split('|');
+                if (vetUsuario != null && vetUsuario.Length > 0)
+                {
+                    nomeDoUsuario = vetUsuario[0];
+                }
+                else
+                    nomeDoUsuario = user_name;
               
-                string msg = "Procure a administração!!";
+                string msg = "Procure a Secretaria!!";
                 string jsonString = "";
 
 
-                if (!RetornarUsuarioValido(user_id))
+                if (!RetornarUsuarioValido(user_id,user_name))
                 {
-                    _logger.LogInformation($"vai bloquear");
 
+                   
                     var root = new Root();
                     root.Result = new Result();
                     root.Result.Event = 6;
                     root.Result.user_id = user_id;
-                    root.Result.user_name = user_name;
+                    root.Result.user_name = nomeDoUsuario;
                     root.Result.message = msg;
                     root.Result.portal_id = 1;
-                    root.Result.actions = new List<Action>();
+                    root.Result.actions = new List<Entities.Action>();
 
                      jsonString = JsonSerializer.Serialize(root);
                     _logger.LogInformation($"new_user_identified.fcgi ------=> objeto:{jsonString}");
@@ -83,18 +67,15 @@ namespace Vestillo.IDFaceAPI.Controllers
                 }
                 else
                 {
-
-
-
                     var root = new Root();
                     root.Result = new Result();
                     root.Result.Event = 7;
                     root.Result.user_id = user_id;
-                    root.Result.user_name = user_name;
+                    root.Result.user_name = nomeDoUsuario;
                     root.Result.message = "Entrada Liberada";
                     root.Result.portal_id = 1;
-                    root.Result.actions = new List<Action>();
-                    root.Result.actions.Add(new Action()
+                    root.Result.actions = new List<Entities.Action>();
+                    root.Result.actions.Add(new Entities.Action()
                     {
                         ActionName = "sec_box",
                         Parameters = "id=65793, reason=1"
@@ -116,9 +97,30 @@ namespace Vestillo.IDFaceAPI.Controllers
         }
 
 
-        private bool RetornarUsuarioValido(int idUser)
+        private bool RetornarUsuarioValido(int idUser, string userName)
         {
-            return false;
+            try
+            {
+                string matricula = string.Empty;
+                if (!string.IsNullOrEmpty(userName) && userName.Contains("|"))
+                {
+                    var vet = userName.Split('|');
+                   if (vet != null && vet.Length == 3)
+                    {
+                        matricula = vet[2];
+                    }
+                }
+
+                var colaboradorRepository = new Business.Repositories.ColaboradorRepository();
+                _logger.LogInformation("Validacao de usuario valido.");
+                return colaboradorRepository.VerificaLiberacaoFinanceiraClube(idUser, matricula);
+              
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,"Erro ao Validar liberacao do clube erro: " + ex.Message);
+                throw ex;
+            }
         }
 
         [HttpPost]

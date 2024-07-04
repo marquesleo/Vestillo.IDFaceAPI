@@ -3,7 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vestillo.IDFaceAPI", "Vestillo.IDFaceAPI\Vestillo.IDFaceAPI.csproj", "{997DD7E5-0F7A-4C53-B8C2-377DFC2F9A44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestillo.IDFaceAPI", "Vestillo.IDFaceAPI\Vestillo.IDFaceAPI.csproj", "{997DD7E5-0F7A-4C53-B8C2-377DFC2F9A44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{0A3BFB9A-9A2A-443B-BE13-7F5C834ECD72}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\Dapper.dll = Libs\Dapper.dll
+		Libs\MySql.Data.dll = Libs\MySql.Data.dll
+		Libs\Newtonsoft.Json.dll = Libs\Newtonsoft.Json.dll
+		Libs\System.Configuration.ConfigurationManager.dll = Libs\System.Configuration.ConfigurationManager.dll
+		Libs\System.Security.Cryptography.ProtectedData.dll = Libs\System.Security.Cryptography.ProtectedData.dll
+		Libs\System.Security.Permissions.dll = Libs\System.Security.Permissions.dll
+		Libs\Vestillo.Business.dll = Libs\Vestillo.Business.dll
+		Libs\Vestillo.Cadastros.dll = Libs\Vestillo.Cadastros.dll
+		Libs\Vestillo.Connection.dll = Libs\Vestillo.Connection.dll
+		Libs\Vestillo.Core.dll = Libs\Vestillo.Core.dll
+		Libs\Vestillo.Financeiros.dll = Libs\Vestillo.Financeiros.dll
+		Libs\Vestillo.Lib.dll = Libs\Vestillo.Lib.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
