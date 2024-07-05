@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>Vestillo.IDFaceAPI31.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="4.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\Libs\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\Libs\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.ConfigurationManager">
+      <HintPath>..\Libs\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData">
+      <HintPath>..\Libs\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="Vestillo.Business">
+      <HintPath>..\Libs\Vestillo.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Vestillo.Cadastros">
+      <HintPath>..\Libs\Vestillo.Cadastros.dll</HintPath>
+    </Reference>
+    <Reference Include="Vestillo.Connection">
+      <HintPath>..\Libs\Vestillo.Connection.dll</HintPath>
+    </Reference>
+    <Reference Include="Vestillo.Core">
+      <HintPath>..\Libs\Vestillo.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Vestillo.Financeiros">
+      <HintPath>..\Libs\Vestillo.Financeiros.dll</HintPath>
+    </Reference>
+    <Reference Include="Vestillo.Forms">
+      <HintPath>..\Libs\Vestillo.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Vestillo.Lib">
+      <HintPath>..\Libs\Vestillo.Lib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+</Project>
