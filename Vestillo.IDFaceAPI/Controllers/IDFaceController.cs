@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
 using System.Text.Json;
 using Vestillo.IDFaceAPI.Entities;
 
@@ -10,14 +12,20 @@ namespace Vestillo.IDFaceAPI.Controllers
     public class IDFaceController : ControllerBase
     {
         private readonly ILogger<IDFaceController> _logger;
-      
+        private readonly IConfiguration _configuracao;
 
         public IDFaceController(ILogger<IDFaceController> logger, IConfiguration configuration)
         {
             this._logger = logger;
-            Connection.ProviderFactory.StringConnection = configuration.GetConnectionString("db");
-            Lib.Funcoes.SetIdEmpresaLogada = Convert.ToInt32(configuration.GetSection("parametros").GetSection("empresa").Value);
+           
+           this. _configuracao = configuration;
+          
+            Connection.ProviderFactory.StringConnection = _configuracao.GetConnectionString("db"); 
+            Lib.Funcoes.SetIdEmpresaLogada = Convert.ToInt32(_configuracao.GetSection("parametros").GetSection("empresa").Value);
             Lib.Funcoes.UtilizaAPI = true;
+
+            
+
         }
 
 
@@ -111,6 +119,7 @@ namespace Vestillo.IDFaceAPI.Controllers
                     }
                 }
 
+               
                 var colaboradorRepository = new Business.Repositories.ColaboradorRepository();
                 _logger.LogInformation("Validacao de usuario valido.");
                 return colaboradorRepository.VerificaLiberacaoFinanceiraClube(idUser, matricula);
