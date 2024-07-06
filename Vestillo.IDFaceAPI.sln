@@ -21,7 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{0A3BFB9A-9
 		Libs\Vestillo.Lib.dll = Libs\Vestillo.Lib.dll
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vestillo.IDFaceAPI31", "Vestillo.IDFaceAPI31\Vestillo.IDFaceAPI31.csproj", "{7B6D7968-3A3F-426B-89C2-F50DE1151C1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestillo.IDFaceAPI31", "Vestillo.IDFaceAPI31\Vestillo.IDFaceAPI31.csproj", "{7B6D7968-3A3F-426B-89C2-F50DE1151C1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDFaceAPI46", "IDFaceAPI46\IDFaceAPI46.csproj", "{86DC6842-E90B-47B7-BA07-AE5A00996CE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{7B6D7968-3A3F-426B-89C2-F50DE1151C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B6D7968-3A3F-426B-89C2-F50DE1151C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B6D7968-3A3F-426B-89C2-F50DE1151C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86DC6842-E90B-47B7-BA07-AE5A00996CE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86DC6842-E90B-47B7-BA07-AE5A00996CE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86DC6842-E90B-47B7-BA07-AE5A00996CE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86DC6842-E90B-47B7-BA07-AE5A00996CE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
