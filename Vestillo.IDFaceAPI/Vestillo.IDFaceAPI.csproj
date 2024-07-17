@@ -40,20 +40,11 @@
     <Reference Include="Vestillo.Business">
       <HintPath>..\Libs\Vestillo.Business.dll</HintPath>
     </Reference>
-    <Reference Include="Vestillo.Cadastros">
-      <HintPath>..\Libs\Vestillo.Cadastros.dll</HintPath>
-    </Reference>
     <Reference Include="Vestillo.Connection">
       <HintPath>..\Libs\Vestillo.Connection.dll</HintPath>
     </Reference>
     <Reference Include="Vestillo.Core">
       <HintPath>..\Libs\Vestillo.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Vestillo.Financeiros">
-      <HintPath>..\Libs\Vestillo.Financeiros.dll</HintPath>
-    </Reference>
-    <Reference Include="Vestillo.Forms">
-      <HintPath>..\Libs\Vestillo.Forms.dll</HintPath>
     </Reference>
     <Reference Include="Vestillo.Lib">
       <HintPath>..\Libs\Vestillo.Lib.dll</HintPath>
