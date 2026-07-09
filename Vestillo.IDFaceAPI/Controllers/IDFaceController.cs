@@ -20,12 +20,29 @@ namespace Vestillo.IDFaceAPI.Controllers
            
            this. _configuracao = configuration;
           
-            Connection.ProviderFactory.StringConnection = _configuracao.GetConnectionString("db"); 
+            Connection.ProviderFactory.StringConnection = GetNewConnectionString(configuration); 
             Lib.Funcoes.SetIdEmpresaLogada = Convert.ToInt32(_configuracao.GetSection("parametros").GetSection("empresa").Value);
             Lib.Funcoes.UtilizaAPI = true;
+       
 
-            
+        }
 
+        private string GetNewConnectionString(IConfiguration configuration)
+        {
+            var cript = new Lib.Cripto();
+           
+
+            var password = configuration.GetConnectionString("db")
+            .Split(';')
+            .FirstOrDefault(p => p.StartsWith("pwd=", StringComparison.OrdinalIgnoreCase))
+            ?.Substring(4);
+
+            if (string.IsNullOrEmpty(password))
+                return configuration.GetConnectionString("db");
+
+            var valorSemCriptografia = cript.Decrypt(password);
+
+            return configuration.GetConnectionString("db").Replace($"pwd={password}", $"pwd={valorSemCriptografia}");
         }
 
 
